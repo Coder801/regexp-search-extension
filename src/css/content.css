@@ -1,0 +1,12 @@
+.search {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 220px;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 0 5px;
+  display: flex;
+  justify-content: center;
+}

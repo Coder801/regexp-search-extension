@@ -8,6 +8,11 @@ const HTMLTemplate = `
     <button class="prev">›</button>
   </section>
 `;
+
+function insertAfter (elem, refElem) {
+  return refElem.parentNode.insertBefore(elem, refElem.nextSibling);
+}
+
 class RegExpSearch {
   constructor (options) {
     this.template = options.template;
@@ -18,7 +23,7 @@ class RegExpSearch {
   renderTemplate () {
     const searchWrapper = document.createElement('div');
     searchWrapper.innerHTML = this.template;
-    document.appendChild(searchWrapper);
+    insertAfter(searchWrapper, document.body);
   }
 
   search (value) {

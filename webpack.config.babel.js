@@ -9,7 +9,6 @@ const config = {
   entry: {
     background: './background.js',
     content: './content.js',
-    options: './options.js',
     popup: './popup.js'
   },
   output: {
@@ -37,6 +36,7 @@ const config = {
       }
     ]
   },
+  watch: true,
   plugins: [
     new CopyPlugin([
       {
@@ -51,16 +51,11 @@ const config = {
       chunks: ['background']
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'options.html'),
-      filename: 'options.html',
-      chunks: ['options']
-    }),
-    new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'popup.html'),
       filename: 'popup.html',
       chunks: ['popup']
-    }),
-    new CleanWebpackPlugin()
+    })
+    // new CleanWebpackPlugin()
   ]
 };
 

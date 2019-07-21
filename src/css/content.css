@@ -2,11 +2,41 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 220px;
+  width: 300px;
   background-color: #fff;
   padding: 5px;
   border: 1px solid #ccc;
-  border-radius: 0 0 0 5px;
+  border-radius: 0 0 0 1px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
   display: flex;
-  justify-content: center;
+  justify-content: stretch;
+  font-family: "Helvetica", Arial;
+}
+.search > .divider {
+  display: block;
+  width: 1px;
+  background: #ccc;
+  margin: 0 5px;
+}
+.search > .input {
+  height: 20px;
+  line-height: 20px;
+  width: 100%;
+  border: none;
+}
+
+.search > .next,
+.search > .prev {
+  width: 20px;
+  height: 20px;
+  display: block;
+  border: none;
+  background: none;
+  margin: 0 5px;
+  font-size: 20px;
+  line-height: 18px;
+}
+
+.highlight {
+  background-color: yellow;
 }

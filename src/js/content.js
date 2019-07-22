@@ -1,17 +1,12 @@
-import '../css/content.css';
+import styles from '../css/content.css';
 
 const HTMLTemplate = `
-  <section class="search">
-    <input class="input" type="text" placeholder="Search" />
-    <span class="divider"></span>
-    <button class="next">‹</button>
-    <button class="prev">›</button>
-  </section>
+  <input class="${styles.input}" type="text" placeholder="Search" />
+  <span class="${styles.result}"></span>
+  <span class="${styles.divider}"></span>
+  <button class="${styles.next}">‹</button>
+  <button class="${styles.prev}">›</button>
 `;
-
-function insertAfter (elem, refElem) {
-  return refElem.parentNode.insertBefore(elem, refElem.nextSibling);
-}
 
 class RegExpSearch {
   constructor (options) {
@@ -21,19 +16,30 @@ class RegExpSearch {
   }
 
   renderTemplate () {
+    const body = document.body;
     const searchWrapper = document.createElement('div');
+    searchWrapper.classList.add(styles.search);
     searchWrapper.innerHTML = this.template;
-    insertAfter(searchWrapper, document.body);
+    body.parentNode.insertBefore(searchWrapper, body.nextSibling);
+  }
+
+  searchResult (matches) {
+    const total = matches.length;
+
+    const result = document.querySelector(`.${styles.result}`);
+    result.innerText = `1 / ${total}`;
   }
 
   search (value) {
-    const pattern = new RegExp(`${value}`, 'i');
-    this.highlight(this.text.match(pattern)[0] || '');
+    const pattern = new RegExp(`${value}`, 'gi');
+    const result = this.text.match(pattern);
+    this.highlight(result[0] || '');
+    this.searchResult(result);
   }
 
   highlight (match) {
     const pattern = new RegExp(`(${match}(?!([^<]+)?>))`, 'gi');
-    const result = this.html.replace(pattern, `<span class="highlight">$1</span>`);
+    const result = this.html.replace(pattern, `<span class="${styles.highlight}">$1</span>`);
     document.body.innerHTML = result;
   }
 }
@@ -43,9 +49,9 @@ const init = function () {
   regExpSearch.renderTemplate();
 
   const selectors = {
-    input: document.querySelector('.search > .input'),
-    next: document.querySelector('.search > .next'),
-    prev: document.querySelector('.search > .prev')
+    input: document.querySelector(`.${styles.input}`),
+    next: document.querySelector(`.${styles.next}`),
+    prev: document.querySelector(`.${styles.prev}`)
   };
 
   selectors.input.addEventListener('keyup', (event) => {

@@ -12,13 +12,17 @@
   justify-content: stretch;
   font-family: "Helvetica", Arial;
 }
-.search > .divider {
+.result {
+  white-space: nowrap;
+  line-height: 20px;
+}
+.divider {
   display: block;
   width: 1px;
   background: #ccc;
   margin: 0 5px;
 }
-.search > .input {
+.input {
   height: 20px;
   line-height: 20px;
   width: 100%;
@@ -38,5 +42,5 @@
 }
 
 .highlight {
-  background-color: yellow;
+  background-color: red;
 }

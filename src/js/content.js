@@ -4,8 +4,8 @@ const HTMLTemplate = `
   <input class="${styles.input}" type="text" placeholder="Search" />
   <span class="${styles.result}"></span>
   <span class="${styles.divider}"></span>
-  <button class="${styles.next}">‹</button>
-  <button class="${styles.prev}">›</button>
+  <button class="${styles.next}"></button>
+  <button class="${styles.prev}"></button>
 `;
 
 class RegExpSearch {
@@ -32,14 +32,21 @@ class RegExpSearch {
 
   search (value) {
     const pattern = new RegExp(`${value}`, 'gi');
-    const result = this.text.match(pattern);
-    this.highlight(result[0] || '');
+    console.log(this.text);
+    const result = this.text
+      .match(pattern)
+      .filter(item => item);
+    this.highlight(result || '');
     this.searchResult(result);
   }
 
-  highlight (match) {
-    const pattern = new RegExp(`(${match}(?!([^<]+)?>))`, 'gi');
-    const result = this.html.replace(pattern, `<span class="${styles.highlight}">$1</span>`);
+  highlight (matches) {
+    let result;
+    console.log(result);
+    matches.forEach(item => {
+      const pattern = new RegExp(`(${item}(?!([^<]+)?>))`, 'i');
+      result = this.html.replace(pattern, `<span class="${styles.highlight}">$1</span>`);
+    });
     document.body.innerHTML = result;
   }
 }
